@@ -1,0 +1,15 @@
+type SentimentData {
+  sentiment: Float!
+  text: String!
+  timestamp: String!
+}
+
+type AggregatedSentiment {
+  overallSentiment: Float!
+  sentimentData: [SentimentData!]!
+  timestamp: String!
+}
+
+type Query {
+  getBitcoinSentiment: AggregatedSentiment!
+}
