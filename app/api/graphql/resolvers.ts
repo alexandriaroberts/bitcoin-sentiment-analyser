@@ -1,4 +1,4 @@
-import { generateMockTweets } from '../../utils/mockData';
+import { generateMockTweets } from '../../utils/mockdata';
 
 export const resolvers = {
   Query: {
