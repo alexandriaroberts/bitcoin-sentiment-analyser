@@ -1,8 +1,9 @@
 import { generateMockTweets } from '../../utils/mockdata';
+import type { AggregatedSentiment } from '../../types/sentiment';
 
 export const resolvers = {
   Query: {
-    getBitcoinSentiment: async () => {
+    getBitcoinSentiment: async (): Promise<AggregatedSentiment> => {
       try {
         console.log('Resolving getBitcoinSentiment...');
         const sentimentData = generateMockTweets(20); // Generate 20 mock tweets

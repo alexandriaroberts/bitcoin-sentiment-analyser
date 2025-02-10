@@ -1,4 +1,5 @@
 import { createYoga, createSchema } from 'graphql-yoga';
+import { type NextRequest, NextResponse } from 'next/server';
 import { resolvers } from './resolvers';
 
 const typeDefs = `
@@ -26,16 +27,23 @@ const schema = createSchema({
 
 const { handleRequest } = createYoga({
   schema,
-  graphqlEndpoint: '/api/graphql',
-  fetchAPI: { Response },
-  landingPage: false,
-  cors: false,
-  logging: {
-    debug: (...args) => console.debug(...args),
-    info: (...args) => console.info(...args),
-    warn: (...args) => console.warn(...args),
-    error: (...args) => console.error(...args),
-  },
+  // Disable graphiql
+  graphiql: false,
+  // Yoga needs to know how to create a valid Next response
+  fetchAPI: { Response: NextResponse },
 });
 
-export { handleRequest as GET, handleRequest as POST };
+async function handler(request: NextRequest) {
+  const response = await handleRequest(request, {
+    // You can pass more context values here if needed
+  });
+
+  // Set CORS headers if needed
+  response.headers.set('Access-Control-Allow-Origin', '*');
+  response.headers.set('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  response.headers.set('Access-Control-Allow-Headers', 'Content-Type');
+
+  return response;
+}
+
+export { handler as GET, handler as POST };
