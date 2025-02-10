@@ -1,37 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Bitcoin Sentiment Analyzer
+
+## Overview
+
+The Bitcoin Sentiment Analyzer is a web application that analyzes the sentiment of Bitcoin-related content. It provides real-time updates on the overall sentiment and displays individual sentiment scores for each piece of content.
+
+## Features
+
+- Real-time sentiment analysis
+- Overall sentiment score visualization
+- Individual content sentiment breakdown
+- Simulated data for demonstration purposes
+- Option to use real Twitter data (requires Twitter API access)
+
+## Technologies Used
+
+- Next.js
+- React
+- TypeScript
+- GraphQL (with Apollo Client)
+- Tailwind CSS
+- shadcn/ui components
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Node.js (v14 or later)
+- npm (v6 or later)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Install dependencies:
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Create a `.env.local` file in the root directory and add the following:
+   TWITTER_BEARER_TOKEN=your_twitter_bearer_token_here
 
-## Learn More
+   (Note: This is optional if you're using simulated data)
 
-To learn more about Next.js, take a look at the following resources:
+3. Start the development server:
+   npm run dev
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. Open your browser and navigate to `http://localhost:3000`
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Using Simulated Data vs. Real Twitter Data
 
-## Deploy on Vercel
+### Simulated Data (Default)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+By default, the application uses simulated data to demonstrate the sentiment analysis functionality. This allows you to run the application without needing Twitter API access.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# bitcoin-sentiment-analyser
+### Using Real Twitter Data
+
+To use real Twitter data:
+
+1. Obtain a Twitter Bearer Token:
+
+- Go to the [Twitter Developer Portal](https://developer.twitter.com/en/portal/dashboard)
+- Create a new project and app
+- Generate a Bearer Token for your app
+
+2. Add your Twitter Bearer Token to the `.env.local` file:
+   TWITTER_BEARER_TOKEN=your_actual_twitter_bearer_token_here
+
+3. Modify the `app/api/graphql/resolvers.ts` file:
+
+- Comment out the import and usage of `generateMockTweets`
+- Uncomment and update the `fetchTwitterData` function to use the Twitter API
+
+4. Update the `BitcoinSentimentAnalyzer.tsx` component:
+
+- Remove references to "simulated" or "mock" data in the UI
+
+5. Restart your development server
+
+Note: Be aware of Twitter API rate limits. The free tier has restrictions on the number of requests you can make.
+
+## Project Structure
+
+- `app/`: Contains the main application code
+- `api/`: API routes, including GraphQL endpoint
+- `components/`: React components
+- `hooks/`: Custom React hooks
+- `utils/`: Utility functions, including mock data generation
+- `public/`: Static assets
+- `styles/`: Global styles
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is licensed under the MIT License.

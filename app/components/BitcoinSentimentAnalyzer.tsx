@@ -32,7 +32,7 @@ export default function BitcoinSentimentAnalyzer() {
         <p className='text-red-500 font-semibold'>Error: {error.message}</p>
         {error.graphQLErrors?.map(({ message }, i) => (
           <p key={i} className='text-sm text-red-400'>
-            {message}
+            GraphQL error: {message}
           </p>
         ))}
         {error.networkError && (
@@ -57,7 +57,7 @@ export default function BitcoinSentimentAnalyzer() {
     <div className='space-y-8'>
       <Card>
         <CardHeader>
-          <CardTitle>Overall Bitcoin Sentiment on Twitter</CardTitle>
+          <CardTitle>Overall Bitcoin Sentiment (Simulated Data)</CardTitle>
         </CardHeader>
         <CardContent>
           <Progress value={(overallSentiment + 5) * 10} className='w-full' />
@@ -73,7 +73,7 @@ export default function BitcoinSentimentAnalyzer() {
         {sentimentData.map((item: any, index: number) => (
           <Card key={index}>
             <CardHeader>
-              <CardTitle>Tweet Sentiment</CardTitle>
+              <CardTitle>Simulated Tweet Sentiment</CardTitle>
             </CardHeader>
             <CardContent>
               <p className='mb-2'>{item.text}</p>
